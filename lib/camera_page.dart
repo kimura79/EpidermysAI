@@ -22,4 +22,34 @@ class _CameraPageState extends State<CameraPage> {
     super.initState();
     availableCameras().then((cams) {
       _cameraController = CameraController(cams.first, ResolutionPreset.medium);
-      _cameraController.initialize().then((_)
+      _cameraController.initialize().then((_) {
+        _cameraController.startImageStream((_) {});
+        setState(() => _ready = true);
+      });
+    });
+    _timer = Timer.periodic(const Duration(milliseconds: 200), (_) {
+      gyroscopeEvents.listen((e) => setState(() => _z = e.z));
+      if (!_photoTaken && _z.abs() < 0.1) {
+        _photoTaken = true;
+        _cameraController.takePicture().then((file) {
+          _cameraController.dispose();
+          Navigator.pushReplacement(context, MaterialPageRoute(
+            builder: (_) => ResultsPage(imagePath: file.path)));
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _cameraController.dispose();
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_ready) return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    return Scaffold(body: CameraPreview(_cameraController));
+  }
+}
