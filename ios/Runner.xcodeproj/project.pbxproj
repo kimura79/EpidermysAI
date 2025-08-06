@@ -1,0 +1,4 @@
+// ! placeholder solo per Codemagic
+// Questo file è un segnaposto per evitare errore di "missing xcodeproj"
+// Non contiene codice reale: il vero file va generato con "flutter create ."
+
