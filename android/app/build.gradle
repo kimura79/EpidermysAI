@@ -1,0 +1,11 @@
+android {
+    compileSdkVersion 33
+
+    defaultConfig {
+        applicationId "com.example.epidermysai"
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+    }
+}
