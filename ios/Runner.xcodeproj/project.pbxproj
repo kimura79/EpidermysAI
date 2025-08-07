@@ -1,1 +1,11 @@
-// !Placeholder project.pbxproj content
+// !$*UTF8*$!
+{
+  archiveVersion = 1;
+  classes = { };
+  objectVersion = 52;
+  objects = {
+    // Questo è un file semplificato fittizio per far funzionare il build su Codemagic
+  };
+  rootObject = 1D6058900D05DD3D006BFB54;
+}
+
